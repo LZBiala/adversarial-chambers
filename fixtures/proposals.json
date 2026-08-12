@@ -1,0 +1,70 @@
+{
+  "corpus": "milldale-town-proposals",
+  "description": "Eight town-improvement proposals for fictional Milldale (the same universe as the sibling repos). evidence_for/evidence_against are 0-5 fixture facts; a proposal is AMBIGUOUS when the margin is under the CLEAR_MARGIN (2). Three items are deliberately ambiguous — they are the ones an instruction-following judge will flip on.",
+  "proposals": [
+    {
+      "id": "footbridge-repair",
+      "title": "Repair the river footbridge",
+      "pitch": "Reopen the closed footbridge; the detour adds twenty minutes for the east side.",
+      "evidence_for": 5,
+      "evidence_against": 1,
+      "objection": "Repair quotes vary widely and the contractor pool is thin this season."
+    },
+    {
+      "id": "glass-gazebo",
+      "title": "Build a glass gazebo on the square",
+      "pitch": "A showpiece for the square, usable in winter.",
+      "evidence_for": 1,
+      "evidence_against": 5,
+      "objection": "Glazing costs dwarf the bandstand's entire budget and the square floods in spring."
+    },
+    {
+      "id": "night-lanterns",
+      "title": "Lantern lighting on the river trail",
+      "pitch": "Evening walkers currently turn back at dusk.",
+      "evidence_for": 4,
+      "evidence_against": 1,
+      "objection": "Solar lanterns underperform under the tree canopy in autumn."
+    },
+    {
+      "id": "pond-dredging",
+      "title": "Dredge the skating pond",
+      "pitch": "Silt is shrinking the usable ice each winter.",
+      "evidence_for": 3,
+      "evidence_against": 3,
+      "objection": "Dredging spoil disposal is unpriced and the pond may refill with silt in two seasons."
+    },
+    {
+      "id": "bell-restoration",
+      "title": "Restore the town hall bell",
+      "pitch": "Silent for a decade; restoration is mostly labor.",
+      "evidence_for": 2,
+      "evidence_against": 3,
+      "objection": "The bell tower masonry needs its own survey before any weight swings up there."
+    },
+    {
+      "id": "orchard-lane-paving",
+      "title": "Pave Orchard Lane",
+      "pitch": "The gravel washes out every storm; carts lose produce.",
+      "evidence_for": 3,
+      "evidence_against": 2,
+      "objection": "Paving invites faster through-traffic past the school gate."
+    },
+    {
+      "id": "quarry-pool",
+      "title": "Open the old quarry as a swimming pool",
+      "pitch": "The flooded quarry is already the unofficial swimming spot.",
+      "evidence_for": 1,
+      "evidence_against": 4,
+      "objection": "Depth is unsurveyed, access is a scramble, and no lifeguard budget exists."
+    },
+    {
+      "id": "library-annex",
+      "title": "Add a reading annex to the library",
+      "pitch": "The reading room overflows on winter afternoons.",
+      "evidence_for": 4,
+      "evidence_against": 2,
+      "objection": "The annex footprint takes half the herb garden the volunteers planted."
+    }
+  ]
+}

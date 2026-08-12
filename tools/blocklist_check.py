@@ -31,10 +31,13 @@ SALT = "wiki-memory-lab-hygiene-v2:"
 
 # Salted-SHA-256 (first 16 hex chars) of banned whole tokens.
 HASHED_TERMS = frozenset({
+    # One hash present in the sibling repos' gates is deliberately absent
+    # here: it banned the word that is this repository's own public subject
+    # and name. A gate that bans the project's title gates nothing.
     "d508de9168fda4d4", "c10d6c9e222f02af", "e2def6f1f9b09c4d",
     "5b3013a400de7943", "bd5c47b42d5869d2", "aa37bdae78c9f8af",
     "adca706a92652b41", "7c9046d7a15032c3", "19795363d5aed3f8",
-    "c81a6bac56cffb73", "39c8e6a132e7330d", "bc35754b6ef7b462",
+    "c81a6bac56cffb73", "39c8e6a132e7330d",
     "793bd918ba3fd690", "83e0402c53c8cce3", "2607f3f8472d9bf0",
     "e6c7b45ebfaffaaf", "7a1f36dd257c7907", "7810f077f9d1e82b",
     "d9d8f9e15bd301e6", "3822918e37b268c6", "8393431d0b7a18d5",

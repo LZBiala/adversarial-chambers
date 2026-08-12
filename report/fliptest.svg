@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="244" viewBox="0 0 760 244" font-family="monospace" font-size="12">
+<rect width="760" height="244" fill="#ffffff"/>
+<text x="220" y="22" font-size="14" fill="#111111">the flip test — verdicts changed by flipping ONLY the default instruction</text>
+<text x="220" y="40" fill="#6b7280">same 8 proposals, same objections; only the standing presumption differs</text>
+<text x="210" y="86" text-anchor="end" fill="#111111">DeferentialJudge</text>
+<rect x="220" y="72" width="450" height="20" fill="#f1f5f9" stroke="#e5e7eb"/>
+<rect x="220" y="72" width="168.8" height="20" fill="#dc2626"/>
+<text x="678" y="86" fill="#111111">3/8 flipped</text>
+<text x="210" y="130" text-anchor="end" fill="#111111">EvidenceJudge</text>
+<rect x="220" y="116" width="450" height="20" fill="#f1f5f9" stroke="#e5e7eb"/>
+<text x="678" y="130" fill="#111111">0/8 flipped</text>
+<text x="220" y="178" fill="#991b1b">scripted judges — the contrast proves the instrument, not any model's calibration</text>
+<text x="220" y="198" fill="#6b7280">a verdict that flips with the instruction was never a verdict about the evidence</text>
+</svg>

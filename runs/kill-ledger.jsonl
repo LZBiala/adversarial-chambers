@@ -1,0 +1,8 @@
+{"default_instruction": "presume-dies", "judge": "EvidenceJudge", "outcome": "SURVIVE", "proposal_id": "footbridge-repair", "reason": "case outweighs the objection (5 vs 1)"}
+{"default_instruction": "presume-dies", "judge": "EvidenceJudge", "outcome": "KILL", "proposal_id": "glass-gazebo", "reason": "objection outweighs the case (5 vs 1): Glazing costs dwarf the bandstand's entire budget and the square floods in spring."}
+{"default_instruction": "presume-dies", "judge": "EvidenceJudge", "outcome": "SURVIVE", "proposal_id": "night-lanterns", "reason": "case outweighs the objection (4 vs 1)"}
+{"default_instruction": "presume-dies", "judge": "EvidenceJudge", "outcome": "SURVIVE", "proposal_id": "pond-dredging", "reason": "evidence tied \u2014 fixed tie-break: a tie survives, regardless of the standing instruction"}
+{"default_instruction": "presume-dies", "judge": "EvidenceJudge", "outcome": "KILL", "proposal_id": "bell-restoration", "reason": "objection outweighs the case (3 vs 2): The bell tower masonry needs its own survey before any weight swings up there."}
+{"default_instruction": "presume-dies", "judge": "EvidenceJudge", "outcome": "SURVIVE", "proposal_id": "orchard-lane-paving", "reason": "case outweighs the objection (3 vs 2)"}
+{"default_instruction": "presume-dies", "judge": "EvidenceJudge", "outcome": "KILL", "proposal_id": "quarry-pool", "reason": "objection outweighs the case (4 vs 1): Depth is unsurveyed, access is a scramble, and no lifeguard budget exists."}
+{"default_instruction": "presume-dies", "judge": "EvidenceJudge", "outcome": "SURVIVE", "proposal_id": "library-annex", "reason": "case outweighs the objection (4 vs 2)"}

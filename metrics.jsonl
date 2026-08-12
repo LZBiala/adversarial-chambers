@@ -1,0 +1,3 @@
+{"ambiguous_items": 3, "judge": "EvidenceJudge", "kills": 3, "kind": "chamber", "proposals": 8, "reasons_logged": 8, "survivals": 5, "verdicts": 8}
+{"flipped_ids": [], "flips": 0, "judge": "EvidenceJudge", "kind": "flip", "total": 8}
+{"flipped_ids": ["pond-dredging", "bell-restoration", "orchard-lane-paving"], "flips": 3, "judge": "DeferentialJudge", "kind": "flip", "total": 8}
