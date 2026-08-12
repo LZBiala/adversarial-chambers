@@ -15,6 +15,9 @@ phrasing was never a verdict about the evidence.
 > Linux.) The bundled agents are deterministic scripts: their numbers prove
 > the harness, never any model's behavior — see *What this does NOT show*.
 
+**🎛 Interactive walkthrough:** [lzbiala.github.io/adversarial-chambers/docs](https://lzbiala.github.io/adversarial-chambers/docs/) —
+step through the trial replay and the flip test in your browser.
+
 ## The idea in 30 seconds
 
 When you want to know if an idea is any good, don't ask one AI — one AI
