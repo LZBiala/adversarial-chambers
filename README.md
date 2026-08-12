@@ -9,11 +9,11 @@ cause of death; and the flip test re-runs the judge on identical material
 changing only its standing instruction, because a verdict that flips with the
 phrasing was never a verdict about the evidence.
 
-> **Every number below regenerates in CI with zero API keys — if a claim
-> drifts, the build fails.** (`pytest` → hygiene gate → full run → `git diff
-> --exit-code`, on Windows and Linux.) The bundled agents are deterministic
-> scripts: their numbers prove the harness, never any model's behavior — see
-> *What this does NOT show*.
+> **Every measured number below — outside the labeled case-study narrative —
+> regenerates in CI with zero API keys; if a claim drifts, the build fails.**
+> (`pytest` → hygiene gate → full run → `git diff --exit-code`, on Windows and
+> Linux.) The bundled agents are deterministic scripts: their numbers prove
+> the harness, never any model's behavior — see *What this does NOT show*.
 
 ## The idea in 30 seconds
 
@@ -135,8 +135,10 @@ outcome data no orchestration framework generates about itself.
 
 `roles.Judge` is the interface: implement `judge(proposal, objection,
 default_instruction) -> Verdict` with a live model and run the same flip
-test. Watch for: run-to-run variance (fix your sampling before trusting a
-flip rate), the reason field (a model that cannot articulate its cause of
+test. Watch for: **statelessness** (the flip test calls the same judge object
+twice per item, interleaved — for stochastic or stateful models construct a
+fresh judge per arm), run-to-run variance (fix your sampling before trusting
+a flip rate), the reason field (a model that cannot articulate its cause of
 death is not judging), and the ambiguous zone — it is precisely where
 instruction sensitivity hides, because clear evidence protects even a
 deferential judge. **Live results will never appear in this README.**
@@ -144,8 +146,12 @@ deferential judge. **Live results will never appear in this README.**
 ## Design notes for engineers
 
 - **Why role separation is structural, not procedural:** the orchestrator
-  refuses one object in two seats. Etiquette can be forgotten under
-  refactoring; a raised exception cannot.
+  refuses one object in two seats and one class in the generator and judge
+  seats. Etiquette can be forgotten under refactoring; a raised exception
+  cannot. Stated limit: this is a guardrail against accidents, not a
+  provenance proof — collusion via delegation or shared state is
+  undetectable from inside Python, and pretending otherwise would be a
+  claim this repo cannot measure.
 - **Why the ledger refuses empty reasons:** the record is the product. A
   verdict you cannot audit later is a coin flip with paperwork.
 - **Why ambiguity is a first-class fixture property:** the flip test's whole

@@ -29,13 +29,38 @@ ITEMS = [(p, ScriptedRefuter(PAIRS).refute(p)) for p, _ in PAIRS]
 
 class TestRoleSeparation:
     def test_one_object_cannot_hold_two_seats(self, tmp_path: Path) -> None:
-        class Impostor(ScriptedGenerator, EvidenceJudge):  # type: ignore[misc]
-            pass
-
         generator = ScriptedGenerator(PAIRS)
         ledger = KillLedger(tmp_path / "ledger.jsonl")
         with pytest.raises(ChamberError, match="two seats"):
             run_chamber(generator, ScriptedRefuter(PAIRS), generator, ledger, PRESUME_DIES)  # type: ignore[arg-type]
+
+    def test_dual_role_class_refused_even_as_two_instances(self, tmp_path: Path) -> None:
+        # The cheapest collusion: one class holding both seats via two
+        # instances. Deeper collusion (delegation, shared state) is
+        # undetectable — the docstring and README say so.
+        class Impostor(ScriptedGenerator, EvidenceJudge):  # type: ignore[misc]
+            pass
+
+        ledger = KillLedger(tmp_path / "ledger.jsonl")
+        with pytest.raises(ChamberError, match="share a class"):
+            run_chamber(
+                Impostor(PAIRS), ScriptedRefuter(PAIRS), Impostor(PAIRS), ledger, PRESUME_DIES
+            )
+
+    def test_judge_verdict_round_trip_validated(self, tmp_path: Path) -> None:
+        class WrongIdJudge(EvidenceJudge):
+            def judge(self, proposal, objection, default_instruction):  # type: ignore[override]
+                verdict = super().judge(proposal, objection, default_instruction)
+                return Verdict(
+                    "some-other-proposal", verdict.outcome, verdict.reason,
+                    self.name, verdict.default_instruction,
+                )
+
+        ledger = KillLedger(tmp_path / "ledger.jsonl")
+        with pytest.raises(ChamberError, match="per-proposal"):
+            run_chamber(
+                ScriptedGenerator(PAIRS), ScriptedRefuter(PAIRS), WrongIdJudge(), ledger, PRESUME_DIES
+            )
 
     def test_unknown_default_refused(self, tmp_path: Path) -> None:
         with pytest.raises(ChamberError, match="unknown default"):

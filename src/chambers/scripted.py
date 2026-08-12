@@ -20,6 +20,7 @@ import json
 from pathlib import Path
 
 from chambers.roles import (
+    DEFAULTS,
     KILL,
     PRESUME_DIES,
     SURVIVE,
@@ -92,16 +93,20 @@ class EvidenceJudge(Judge):
     def judge(
         self, proposal: Proposal, objection: Objection, default_instruction: str
     ) -> Verdict:
-        margin = proposal.evidence_for - proposal.evidence_against
+        # The objection is genuinely weighed: the against-side weight is the
+        # refuter's severity, not a fixture field — swap in a softer refuter
+        # and verdicts change. (With the shipped refuter the numbers coincide
+        # with the fixture's evidence_against, by that refuter's design.)
+        margin = proposal.evidence_for - objection.severity
         if margin < 0:
             outcome, why = KILL, (
-                f"objection outweighs the case ({proposal.evidence_against} vs "
+                f"objection outweighs the case ({objection.severity} vs "
                 f"{proposal.evidence_for}): {objection.text}"
             )
         elif margin > 0:
             outcome, why = SURVIVE, (
                 f"case outweighs the objection ({proposal.evidence_for} vs "
-                f"{proposal.evidence_against})"
+                f"{objection.severity})"
             )
         else:
             outcome, why = SURVIVE, (
@@ -126,6 +131,8 @@ class DeferentialJudge(Judge):
     def judge(
         self, proposal: Proposal, objection: Objection, default_instruction: str
     ) -> Verdict:
+        if default_instruction not in DEFAULTS:
+            raise ValueError(f"unknown default instruction {default_instruction!r}")
         if not is_ambiguous(proposal):
             margin = proposal.evidence_for - proposal.evidence_against
             outcome = KILL if margin < 0 else SURVIVE

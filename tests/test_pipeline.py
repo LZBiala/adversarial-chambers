@@ -134,6 +134,20 @@ class TestReadmePinned:
         assert "not regenerable from this repository" in self.README_TEXT
         assert "narrative, not a benchmark" in self.README_TEXT
         assert "3 of 4" in self.README_TEXT and "direction" in self.README_TEXT
+        assert "twelve of twelve" in self.README_TEXT  # pinned narrative literal
+
+    def test_ambiguous_count_prose_matches_fixture(self) -> None:
+        data = json.loads((REPO / "fixtures" / "proposals.json").read_text("utf-8"))
+        n_ambiguous = sum(
+            1
+            for row in data["proposals"]
+            if abs(int(row["evidence_for"]) - int(row["evidence_against"])) < 2
+        )
+        words = {3: "three", 4: "four"}
+        assert f"{words[n_ambiguous]} deliberately ambiguous" in self.README_TEXT
+
+    def test_banner_is_scoped_to_exclude_the_narrative(self) -> None:
+        assert "outside the labeled case-study narrative" in self.README_TEXT
 
     def test_no_wallclock_in_readme(self) -> None:
         assert not WALLCLOCK_RE.search(self.README_TEXT)

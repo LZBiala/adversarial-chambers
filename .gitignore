@@ -1,4 +1,4 @@
-﻿# tooling caches
+# tooling caches
 __pycache__/
 *.py[cod]
 .pytest_cache/
@@ -7,5 +7,5 @@ __pycache__/
 build/
 dist/
 
-# NOTE: runs/, report/, and metrics.jsonl are COMMITTED on purpose â€”
-# they are golden outputs; CI regenerates them and fails the build on any diff.
+# NOTE: runs/, report/, and metrics.jsonl are COMMITTED on purpose - they are
+# golden outputs; CI regenerates them and fails the build on any diff.

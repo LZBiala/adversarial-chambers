@@ -5,6 +5,11 @@ by someone who never saw it die. The ledger refuses a verdict without a
 written reason — an unexplained KILL is exactly as useless as an unexplained
 SURVIVE — and appends one JSON line per verdict so the record is grep-able
 and diff-able forever.
+
+Append semantics, stated: verdicts are recorded one at a time, as they
+happen. A chamber that fails mid-run therefore leaves a visible PARTIAL
+record — deliberately. An audit log that erased itself when something went
+wrong would be the opposite of an audit log.
 """
 from __future__ import annotations
 

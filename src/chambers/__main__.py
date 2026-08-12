@@ -83,6 +83,7 @@ def demo(quiet: bool) -> int:
     emit(f"CHAMBER RUN: {len(pairs)} proposals, dedicated refutation, "
          f"{judge.name}, default '{PRESUME_DIES}'")
     verdicts = run_chamber(generator, refuter, judge, ledger, PRESUME_DIES)
+    objections = {p.proposal_id: refuter.refute(p) for p, _ in pairs}
     transcript: list[str] = [
         "# chamber transcript",
         "",
@@ -91,8 +92,13 @@ def demo(quiet: bool) -> int:
     ]
     for verdict in verdicts:
         line = f"- {verdict.proposal_id}: {verdict.outcome} — {verdict.reason}"
+        objection_line = (
+            f"  objection raised: {objections[verdict.proposal_id].text}"
+        )
         transcript.append(line)
+        transcript.append(objection_line)
         emit(line)
+        emit(objection_line)
 
     items = [(p, refuter.refute(p)) for p, _ in pairs]
     emit("")

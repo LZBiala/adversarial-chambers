@@ -91,7 +91,7 @@
     <b>flip test</b> — re-run the judge on identical material changing only its
     standing instruction, because a verdict that flips with the phrasing was never
     a verdict about the evidence.</p>
-    <div class="badge">✓ every measured number on this page regenerates in CI with zero API keys — if a claim drifts, the build fails</div>
+    <div class="badge">✓ every measured number on this page — outside the labeled case-study narrative — regenerates in CI with zero API keys</div>
     <nav class="chips">
       <a href="#idea">The idea</a>
       <a href="#pipeline">The pattern</a>
@@ -270,7 +270,7 @@ const btnNext = document.getElementById("btnNext");
 const btnReset = document.getElementById("btnReset");
 let pos = 0;
 function render() {
-  let html = '<span class="dim">CHAMBER: scripted generator/refuter/judges — deterministic, zero API keys; results are harness conformance, not any model’s behavior</span>\n';
+  let html = '<span class="dim">CHAMBER: scripted generator/refuter/judges — deterministic, zero API keys; results are harness conformance, not any model\'s behavior</span>\n';
   for (let i = 0; i < pos; i++) {
     const b = BEATS[i];
     html += (b.c ? `<span class="${b.c}">` : "") + escapeHtml(b.line) + (b.c ? "</span>" : "") + "\n";

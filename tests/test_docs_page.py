@@ -60,4 +60,16 @@ class TestCaseStudyDiscipline:
         assert "NARRATIVE, NOT A BENCHMARK" in HTML
         assert "NOT REGENERABLE FROM THIS REPOSITORY" in HTML
         assert "3 of 4" in HTML
+        assert "twelve of twelve" in HTML  # pinned narrative literal
         assert "direction" in HTML  # the not-established half stated
+
+    def test_badge_scoped_to_exclude_the_narrative(self) -> None:
+        assert "outside the labeled case-study narrative" in HTML
+
+    def test_tie_numbers_match_the_fixture(self) -> None:
+        data = json.loads(
+            (REPO / "fixtures" / "proposals.json").read_text("utf-8")
+        )
+        pond = next(r for r in data["proposals"] if r["id"] == "pond-dredging")
+        assert pond["evidence_for"] == pond["evidence_against"]
+        assert f"Evidence {pond['evidence_for']} vs {pond['evidence_against']}" in HTML

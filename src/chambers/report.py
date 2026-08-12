@@ -57,7 +57,8 @@ def render_flip_svg(metrics: Metrics) -> str:
     for i, row in enumerate(rows):
         y = top + i * row_h
         flips = int(row["flips"])  # type: ignore[arg-type]
-        frac = flips / total if total else 0.0
+        row_total = int(row["total"])  # type: ignore[arg-type]
+        frac = flips / row_total if row_total else 0.0
         color = _BLUE if flips == 0 else _RED
         parts.append(
             f'<text x="{left - 10}" y="{y + 22}" text-anchor="end" fill="#111111">'
@@ -74,7 +75,7 @@ def render_flip_svg(metrics: Metrics) -> str:
             )
         parts.append(
             f'<text x="{left + bar_w + 8}" y="{y + 22}" fill="#111111">'
-            f"{flips}/{total} flipped</text>"
+            f"{flips}/{row_total} flipped</text>"
         )
     base_y = top + row_h * len(rows) + 26
     parts.append(
@@ -101,7 +102,8 @@ def render_claims(metrics: Metrics) -> str:
             "| Every verdict carries its cause of death "
             f"| **{ch['verdicts']} verdicts ledgered: {ch['kills']} kills, "
             f"{ch['survivals']} survivals — {ch['reasons_logged']} written reasons, "
-            "0 empty** | the chamber refuses a verdict without a written reason; "
+            f"{int(ch['verdicts']) - int(ch['reasons_logged'])} empty** "  # type: ignore[call-overload]
+            "| the chamber refuses a verdict without a written reason; "
             "the ledger is one JSON line per verdict | conformance of the harness — "
             "the scripted judges' reasons are rule-generated, not model judgment |"
         ),
