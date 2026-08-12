@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>adversarial-chambers — ideas on trial, and the judge is too</title>
+<style>
+  :root {
+    --ink: #111827; --muted: #6b7280; --bg: #ffffff; --panel: #f8fafc;
+    --line: #e5e7eb; --blue: #2563eb; --red: #dc2626; --green: #059669;
+    --amber: #b45309; --term-bg: #0f172a; --term-ink: #e2e8f0;
+    --term-dim: #94a3b8; --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--bg); color: var(--ink); line-height: 1.6;
+    font-family: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif; }
+  code, pre, .term { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+  header.hero { padding: 56px 0 40px; border-bottom: 1px solid var(--line); }
+  .hero h1 { font-size: 2rem; letter-spacing: -0.02em; }
+  .hero h1 span { color: var(--blue); }
+  .hero p.tag { font-size: 1.12rem; color: var(--muted); max-width: 46em; margin-top: 10px; }
+  .badge { display: inline-block; margin-top: 18px; padding: 8px 14px;
+    background: #ecfdf5; color: var(--green); border: 1px solid #a7f3d0;
+    border-radius: 999px; font-size: 0.85rem; font-weight: 600; }
+  nav.chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 18px 0; }
+  nav.chips a { text-decoration: none; color: var(--ink); background: var(--panel);
+    border: 1px solid var(--line); padding: 6px 14px; border-radius: 999px; font-size: 0.88rem; }
+  nav.chips a:hover { border-color: var(--blue); color: var(--blue); }
+  section { padding: 44px 0; border-bottom: 1px solid var(--line); }
+  section h2 { font-size: 1.45rem; margin-bottom: 6px; }
+  section p.lead { color: var(--muted); margin-bottom: 22px; max-width: 52em; }
+  .recipe { background: var(--panel); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 22px 24px; max-width: 52em; font-size: 1.05rem; }
+  .recipe b { color: var(--blue); }
+  .loop { display: flex; flex-wrap: wrap; gap: 10px; }
+  .stage { flex: 1 1 160px; background: var(--panel); border: 1.5px solid var(--line);
+    border-radius: var(--radius); padding: 14px; cursor: pointer; text-align: left;
+    font: inherit; color: inherit; transition: border-color .15s, transform .15s; }
+  .stage:hover { transform: translateY(-2px); }
+  .stage.active { border-color: var(--blue); background: #eff6ff; }
+  .stage .num { font-size: 0.72rem; font-weight: 700; color: var(--blue); letter-spacing: 0.08em; }
+  .stage h3 { font-size: 0.98rem; margin: 2px 0 4px; }
+  .stage p { font-size: 0.8rem; color: var(--muted); line-height: 1.45; }
+  .stage-detail { margin-top: 16px; background: var(--term-bg); color: var(--term-ink);
+    border-radius: var(--radius); padding: 18px 20px; font-size: 0.88rem; }
+  .stage-detail .lbl { color: var(--term-dim); font-size: 0.75rem; letter-spacing: 0.06em; }
+  .player { display: grid; grid-template-columns: 1.25fr 1fr; gap: 16px; }
+  @media (max-width: 760px) { .player { grid-template-columns: 1fr; } }
+  .term { background: var(--term-bg); color: var(--term-ink); border-radius: var(--radius);
+    padding: 16px 18px; min-height: 300px; font-size: 0.82rem; line-height: 1.7;
+    overflow-x: auto; white-space: pre-wrap; word-break: break-word; }
+  .term .dim { color: var(--term-dim); }
+  .term .kill { color: #f87171; }
+  .term .survive { color: #34d399; }
+  .term .flip { color: #fbbf24; font-weight: 700; }
+  .explain { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 18px 20px; font-size: 0.92rem; }
+  .explain .step-name { font-weight: 700; color: var(--blue); font-size: 0.8rem; letter-spacing: 0.06em; }
+  .explain h3 { margin: 4px 0 8px; font-size: 1.05rem; }
+  .controls { display: flex; gap: 8px; margin-top: 14px; align-items: center; flex-wrap: wrap; }
+  .controls button { font: inherit; padding: 8px 18px; border-radius: 8px;
+    border: 1px solid var(--line); background: var(--bg); cursor: pointer; font-weight: 600; }
+  .controls button.primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .controls button:disabled { opacity: 0.4; cursor: default; }
+  .controls .where { color: var(--muted); font-size: 0.85rem; margin-left: auto; }
+  .quotenote { font-size: 0.8rem; color: var(--muted); margin-top: 10px; }
+  .chart { margin-top: 8px; text-align: center; }
+  .chart img { max-width: 100%; border: 1px solid var(--line); border-radius: var(--radius); }
+  .chart p { font-size: 0.8rem; color: var(--muted); margin-top: 6px; }
+  .honest { background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--radius);
+    padding: 22px 24px; max-width: 56em; }
+  .honest h3 { color: var(--amber); font-size: 1rem; margin-bottom: 8px; }
+  .honest p { font-size: 0.92rem; }
+  .case { background: var(--panel); border-left: 4px solid var(--blue); border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 22px 24px; max-width: 56em; font-size: 0.95rem; }
+  .case .label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; color: var(--amber); }
+  .howto pre { background: var(--term-bg); color: var(--term-ink); padding: 10px 14px;
+    border-radius: 8px; margin-top: 8px; font-size: 0.82rem; overflow-x: auto; }
+  footer { padding: 34px 0 60px; color: var(--muted); font-size: 0.85rem; }
+  a { color: var(--blue); }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <h1><span>adversarial-chambers</span> — ideas on trial, and the judge is too</h1>
+    <p class="tag">Generator, dedicated refuter, and judge as <b>structurally separated
+    roles</b>; every verdict in a kill ledger with its cause of death; and the
+    <b>flip test</b> — re-run the judge on identical material changing only its
+    standing instruction, because a verdict that flips with the phrasing was never
+    a verdict about the evidence.</p>
+    <div class="badge">✓ every measured number on this page regenerates in CI with zero API keys — if a claim drifts, the build fails</div>
+    <nav class="chips">
+      <a href="#idea">The idea</a>
+      <a href="#pipeline">The pattern</a>
+      <a href="#trial">A real run</a>
+      <a href="#fliptest">The flip test</a>
+      <a href="#case">The case study</a>
+      <a href="#not">What it does NOT show</a>
+    </nav>
+  </div>
+</header>
+
+<section id="idea">
+  <div class="wrap">
+    <h2>The idea in 30 seconds</h2>
+    <div class="recipe">
+      When you want to know if an idea is any good, don't ask one AI — one AI mostly
+      agrees with however you phrased the question. Run a <b>courtroom</b>: one side
+      proposes, a dedicated opponent attacks each proposal, and a judge weighs the
+      exchange, with every ruling written down. Then the step everyone skips:
+      <b>cross-examine the judge</b> — same case, twice, changing only the standing
+      instruction. If the ruling changes, you were never measuring the idea. You were
+      measuring your own prompt.
+    </div>
+  </div>
+</section>
+
+<section id="pipeline">
+  <div class="wrap">
+    <h2>The pattern</h2>
+    <p class="lead">Four structural rules, enforced in code. Click one.</p>
+    <div class="loop" id="loopRow"></div>
+    <div class="stage-detail" id="stageDetail"></div>
+  </div>
+</section>
+
+<section id="trial">
+  <div class="wrap">
+    <h2>A real run, replayed</h2>
+    <p class="lead">These lines are quoted verbatim from the committed
+    <code>runs/chamber.md</code>, which CI regenerates on every push.</p>
+    <div class="player">
+      <div class="term" id="termOut"></div>
+      <div>
+        <div class="explain" id="explainBox"></div>
+        <div class="controls">
+          <button id="btnPrev" type="button">← Back</button>
+          <button id="btnNext" type="button" class="primary">Next →</button>
+          <button id="btnReset" type="button">Restart</button>
+          <span class="where" id="whereAmI"></span>
+        </div>
+        <p class="quotenote">Verbatim from <code>runs/chamber.md</code>, condensed between beats.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="fliptest">
+  <div class="wrap">
+    <h2>The flip test — the contrast that proves the instrument</h2>
+    <div class="chart">
+      <img src="../report/fliptest.svg" alt="flip-test contrast: evidence judge zero flips, deferential judge flips on the ambiguous items"
+           onerror="this.parentElement.querySelector('p').textContent='Chart: see report/fliptest.svg in the repository.'; this.remove()">
+      <p>The disclaimer lives <i>inside</i> the SVG legend: “scripted judges — the
+      contrast proves the instrument, not any model's calibration”.</p>
+    </div>
+    <p class="lead" style="margin-top:16px">Two scripted judges, same eight proposals,
+    same objections — only the standing default changes between runs. The
+    evidence-driven judge flips <b>0/8</b>. The deferential judge flips <b>3/8</b> —
+    exactly the ambiguous items, and its written reason admits the deference. If a
+    judge defers to its instructions, the flip test lights up; if it weighs evidence,
+    it stays dark. What a <i>live</i> judge scores is the question this repo hands
+    you the tool to answer.</p>
+    <div class="howto">
+      <pre>git clone https://github.com/LZBiala/adversarial-chambers
+cd adversarial-chambers
+pip install -e .          # stdlib-only runtime
+python -m chambers demo</pre>
+    </div>
+  </div>
+</section>
+
+<section id="case">
+  <div class="wrap">
+    <h2>The case study that started this</h2>
+    <div class="case">
+      <div class="label">NARRATIVE, NOT A BENCHMARK — NOT REGENERABLE FROM THIS REPOSITORY</div>
+      <p style="margin-top:10px">In the author's private multi-agent review program, two
+      review panels had rejected twelve of twelve proposals — a record that looked like
+      rigor. Re-judging a sample of those rejections on <b>byte-identical text</b>,
+      changing only the judge's standing default from "presume this dies" to "presume
+      this survives", reversed <b>3 of 4 verdicts</b>. What that established: the judges
+      were <i>instruction-sensitive</i> — a reliability failure upstream of any question
+      about the ideas. What it did <b>not</b> establish: the <i>direction</i> of bias —
+      the follow-up design was ruled unidentifiable by its own review. The
+      twelve-of-twelve record was stripped of evidentiary weight: not refuted, demoted.
+      The flip-test harness on this page is how you would measure the same thing on
+      your own judges.</p>
+    </div>
+  </div>
+</section>
+
+<section id="not">
+  <div class="wrap">
+    <h2>What this does NOT show</h2>
+    <div class="honest">
+      <h3>A judge built to defer, deferring, proves the instrument — nothing else</h3>
+      <p>The bundled agents are deterministic scripts. The flip-test contrast proves
+      the harness detects instruction sensitivity; it says nothing about any AI model,
+      cannot identify the <i>direction</i> of a real judge's bias (that needs a design
+      where blinding and evidence access do not covary with the instruction), and
+      cannot tell you whether adversarial review improves decisions. Live results
+      belong to whoever runs them — with their own variance, versions, and error bars —
+      and will never appear in this repository's README.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    MIT licensed · <a href="https://github.com/LZBiala/adversarial-chambers">source &amp; README</a> ·
+    this page is a static file in <code>docs/</code> — no build system, no external requests.
+  </div>
+</footer>
+
+<script>
+"use strict";
+/* ---------- pattern stages ---------- */
+const STAGES = [
+  { k: "SEPARATE", t: "One object, one seat", d: "Generator, refuter, and judge are distinct interfaces, and the orchestrator refuses one object in two seats.",
+    n: "An agent that judges its own proposal is a rubber stamp with extra steps. This is enforced by a raised exception, not etiquette — etiquette gets refactored away." },
+  { k: "REFUTE", t: "Dedicated opposition", d: "Every proposal gets its own refutation before any judgment; the judge sees the proposal AND the objection.",
+    n: "A judge that only ever hears the pitch is a fan. The dedicated refuter guarantees every idea faces its strongest available attack." },
+  { k: "JUDGE", t: "Verdict with a reason", d: "KILL or SURVIVE, plus a mandatory written cause. The ledger refuses an empty reason.",
+    n: "A verdict you cannot audit later is a coin flip with paperwork. The reason field is the product, not a nicety." },
+  { k: "LEDGER", t: "The kill ledger", d: "One JSON line per verdict, append-only within a run — outcome, reason, judge, and the standing instruction it ran under.",
+    n: "A clean kill is knowledge; an unrecorded one gets re-proposed a month later by someone who never saw it die. The instruction is recorded because of what the flip test proves: it can BE the verdict." },
+];
+const loopRow = document.getElementById("loopRow");
+const stageDetail = document.getElementById("stageDetail");
+STAGES.forEach((s, i) => {
+  const b = document.createElement("button");
+  b.className = "stage"; b.type = "button";
+  b.innerHTML = `<div class="num">RULE ${i + 1}</div><h3>${s.k}</h3><p>${s.d}</p>`;
+  b.addEventListener("click", () => selectStage(i));
+  loopRow.appendChild(b);
+});
+function selectStage(i) {
+  [...loopRow.children].forEach((c, j) => c.classList.toggle("active", i === j));
+  stageDetail.innerHTML =
+    `<div class="lbl">WHY IT MATTERS</div><div style="margin-top:6px">${STAGES[i].n}</div>`;
+}
+selectStage(0);
+
+/* ---------- trial replay (verbatim from runs/chamber.md) ---------- */
+const BEATS = [
+  { c: "survive", line: "- footbridge-repair: SURVIVE — case outweighs the objection (5 vs 1)", name: "CLEAR SURVIVE",
+    h: "Strong case, weak objection", e: "The refuter took its shot — thin contractor pool — and the evidence balance still carried it. The reason cites the numbers it weighed." },
+  { c: "kill", line: "- glass-gazebo: KILL — objection outweighs the case (5 vs 1): Glazing costs dwarf the bandstand's entire budget and the square floods in spring.", name: "CLEAR KILL",
+    h: "A kill with its cause of death attached", e: "This is the ledger's whole point: in a month, when someone proposes the gazebo again, the record says exactly why it died." },
+  { c: "survive", line: "- pond-dredging: SURVIVE — evidence tied — fixed tie-break: a tie survives, regardless of the standing instruction", name: "THE TIE",
+    h: "Ambiguity, handled by rule", e: "Evidence 3 vs 3. The evidence judge resolves ties by FIXED rule — which is exactly why it cannot flip. Remember this item; it stars in the next act." },
+  { c: "kill", line: "- bell-restoration: KILL — objection outweighs the case (3 vs 2): The bell tower masonry needs its own survey before any weight swings up there.", name: "NARROW KILL",
+    h: "A one-point margin", e: "Also ambiguous territory — margin of one. Evidence still decides here. But a judge that DEFERS would rule on the instruction instead…" },
+  { c: "dim", line: "## flip test", name: "ACT TWO",
+    h: "Cross-examine the judge", e: "Same eight proposals, same objections. Only the standing default changes: presume-dies, then presume-survives." },
+  { c: "survive", line: "- EvidenceJudge: 0/8 verdicts flipped", name: "DARK",
+    h: "Evidence-driven: the test stays dark", e: "Every verdict identical under both instructions — instruction-insensitive by construction, and now demonstrated." },
+  { c: "flip", line: "- DeferentialJudge: 3/8 verdicts flipped (flipped: pond-dredging, bell-restoration, orchard-lane-paving)", name: "★ LIT",
+    h: "Deferential: the test lights up", e: "Exactly the three ambiguous items flipped — the judge followed the instruction wherever evidence didn't force its hand. A verdict that flips with the phrasing was never a verdict about the evidence." },
+];
+const termOut = document.getElementById("termOut");
+const explainBox = document.getElementById("explainBox");
+const whereAmI = document.getElementById("whereAmI");
+const btnPrev = document.getElementById("btnPrev");
+const btnNext = document.getElementById("btnNext");
+const btnReset = document.getElementById("btnReset");
+let pos = 0;
+function render() {
+  let html = '<span class="dim">CHAMBER: scripted generator/refuter/judges — deterministic, zero API keys; results are harness conformance, not any model’s behavior</span>\n';
+  for (let i = 0; i < pos; i++) {
+    const b = BEATS[i];
+    html += (b.c ? `<span class="${b.c}">` : "") + escapeHtml(b.line) + (b.c ? "</span>" : "") + "\n";
+  }
+  termOut.innerHTML = html;
+  if (pos === 0) {
+    explainBox.innerHTML = `<div class="step-name">READY</div><h3>Press Next to replay the trial</h3><p>Seven beats: two clear rulings, the tie, a narrow kill — then the judge itself takes the stand.</p>`;
+  } else {
+    const b = BEATS[pos - 1];
+    explainBox.innerHTML = `<div class="step-name">${b.name}</div><h3>${b.h}</h3><p>${b.e}</p>`;
+  }
+  whereAmI.textContent = `${pos} / ${BEATS.length}`;
+  btnPrev.disabled = pos === 0;
+  btnNext.disabled = pos === BEATS.length;
+}
+btnNext.addEventListener("click", () => { if (pos < BEATS.length) { pos++; render(); } });
+btnPrev.addEventListener("click", () => { if (pos > 0) { pos--; render(); } });
+btnReset.addEventListener("click", () => { pos = 0; render(); });
+function escapeHtml(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+render();
+</script>
+</body>
+</html>
