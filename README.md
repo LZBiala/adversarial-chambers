@@ -180,6 +180,26 @@ CI (Windows + Linux, pinned Python, zero secrets): pytest → hygiene gate →
 full regeneration → `git diff --exit-code`. **The committed artifacts ARE the
 claims; CI proves they regenerate.**
 
+## Field notes (2026)
+
+The flip test is what 2026 write-ups call **judge meta-evaluation** —
+treating the judge as a measurement instrument whose validity must itself be
+tested (further reading: DeepEval's LLM-as-a-judge guide,
+<https://deepeval.com/blog/llm-as-a-judge>). With the field's verifier-first
+shift — "who verifies the agents?" — structural role separation plus tested
+judges is the current consensus direction; this repo ships a small working
+instance of both.
+
+## Roadmap
+
+Future work — nothing below exists yet:
+
+- **Judge calibration curve:** a stratified ground-truth set reporting judge
+  sensitivity and specificity with confidence intervals, instead of raw
+  agreement.
+- **k-run live-model variance study:** to be published as a separate,
+  labeled study — never inside the CI-gated claims above.
+
 ## License
 
 MIT.
