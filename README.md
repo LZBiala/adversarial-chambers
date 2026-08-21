@@ -122,6 +122,22 @@ typed by hand, and CI fails if regeneration disagrees.
 
 Regenerate everything yourself: `python -m chambers demo --quiet && git diff`.
 
+## The flip test is a standing instrument
+
+The 3/8 vs 0/8 flip counts above are not a verdict on judges in general —
+they are a verdict on two specific (instruction, model) pairs. Calibration
+is not a property of a judge alone; it belongs to the instruction and the
+model together, and the fixture proves it: the same evidence, the same
+eight items, produces zero flips under one scripted judge and three under
+the other. The move this suggests is not to delete the harness once a judge
+looks trustworthy — it is to keep the instrument and re-run it: whenever the
+model sitting in the judge seat changes, the (instruction, model) pair
+changes with it, and the flip rate measured before no longer describes what
+is in the seat now. This repo cannot make that replay keyless for a live
+model — a real judge needs real credentials. What it can do is this: replay
+the same eight items — the harness stays deterministic and free; the keys,
+and the numbers, are yours.
+
 ## What this does NOT show
 
 The bundled generator, refuter, and judges are deterministic scripts. A judge
@@ -199,6 +215,15 @@ Future work — nothing below exists yet:
   agreement.
 - **k-run live-model variance study:** to be published as a separate,
   labeled study — never inside the CI-gated claims above.
+- **Static pipeline, dynamic routing:** a routing pattern described is not a
+  routing pattern measured. The ambiguity signal already computed for the
+  flip test (evidence margin under the clear threshold) is the natural gate:
+  send only ambiguous items to escalation, and leave clear-evidence items on
+  the current single-judge pipeline. Nothing below is that; today's pipeline
+  is static — one judge type per run, no branching. The acceptance test that
+  would earn this the word "measured": the escalated set the router produces
+  must equal the fixture's ambiguous set, item for item — escalated set ==
+  ambiguous set, or the router is not doing what it claims.
 
 ## License
 
