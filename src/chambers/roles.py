@@ -1,7 +1,7 @@
 """The chamber's cast: frozen value objects and the three role seams.
 
 Role separation is the architecture claim: a Generator can only propose, a
-Refuter can only object, a Judge can only judge — and the orchestrator
+Refuter can only object, a Judge can only judge - and the orchestrator
 refuses to let one object play two seats in the same chamber. An agent that
 judges its own proposal is not a chamber; it is a rubber stamp with extra
 steps.
@@ -39,7 +39,7 @@ class Objection:
 class Verdict:
     proposal_id: str
     outcome: str  # KILL | SURVIVE
-    reason: str  # the cause of death (or survival grounds) — never empty
+    reason: str  # the cause of death (or survival grounds) - never empty
     judge: str
     default_instruction: str
 
@@ -60,8 +60,8 @@ class Refuter(ABC):
 
 class Judge(ABC):
     """The seam a live model would implement. The bundled judges are
-    deterministic rules that prove the harness; live judging behavior — and
-    its flip rate — belongs to whoever wires a model in (v1.1)."""
+    deterministic rules that prove the harness; live judging behavior - and
+    its flip rate - belongs to whoever wires a model in (v1.1)."""
 
     name: str
 

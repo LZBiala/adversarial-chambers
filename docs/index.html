@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>adversarial-chambers — ideas on trial, and the judge is too</title>
+<title>adversarial-chambers - ideas on trial, and the judge is too</title>
 <style>
   :root {
     --ink: #111827; --muted: #6b7280; --bg: #ffffff; --panel: #f8fafc;
@@ -85,13 +85,13 @@
 
 <header class="hero">
   <div class="wrap">
-    <h1><span>adversarial-chambers</span> — ideas on trial, and the judge is too</h1>
+    <h1><span>adversarial-chambers</span> - ideas on trial, and the judge is too</h1>
     <p class="tag">Generator, dedicated refuter, and judge as <b>structurally separated
     roles</b>; every verdict in a kill ledger with its cause of death; and the
-    <b>flip test</b> — re-run the judge on identical material changing only its
+    <b>flip test</b> - re-run the judge on identical material changing only its
     standing instruction, because a verdict that flips with the phrasing was never
     a verdict about the evidence.</p>
-    <div class="badge">✓ every measured number on this page — outside the labeled case-study narrative — regenerates in CI with zero API keys</div>
+    <div class="badge">✓ every measured number on this page - outside the labeled case-study narrative - regenerates in CI with zero API keys</div>
     <nav class="chips">
       <a href="#idea">The idea</a>
       <a href="#pipeline">The pattern</a>
@@ -107,11 +107,11 @@
   <div class="wrap">
     <h2>The idea in 30 seconds</h2>
     <div class="recipe">
-      When you want to know if an idea is any good, don't ask one AI — one AI mostly
+      When you want to know if an idea is any good, don't ask one AI - one AI mostly
       agrees with however you phrased the question. Run a <b>courtroom</b>: one side
       proposes, a dedicated opponent attacks each proposal, and a judge weighs the
       exchange, with every ruling written down. Then the step everyone skips:
-      <b>cross-examine the judge</b> — same case, twice, changing only the standing
+      <b>cross-examine the judge</b> - same case, twice, changing only the standing
       instruction. If the ruling changes, you were never measuring the idea. You were
       measuring your own prompt.
     </div>
@@ -150,16 +150,16 @@
 
 <section id="fliptest">
   <div class="wrap">
-    <h2>The flip test — the contrast that proves the instrument</h2>
+    <h2>The flip test - the contrast that proves the instrument</h2>
     <div class="chart">
       <img src="../report/fliptest.svg" alt="flip-test contrast: evidence judge zero flips, deferential judge flips on the ambiguous items"
            onerror="this.parentElement.querySelector('p').textContent='Chart: see report/fliptest.svg in the repository.'; this.remove()">
-      <p>The disclaimer lives <i>inside</i> the SVG legend: “scripted judges — the
+      <p>The disclaimer lives <i>inside</i> the SVG legend: “scripted judges - the
       contrast proves the instrument, not any model's calibration”.</p>
     </div>
     <p class="lead" style="margin-top:16px">Two scripted judges, same eight proposals,
-    same objections — only the standing default changes between runs. The
-    evidence-driven judge flips <b>0/8</b>. The deferential judge flips <b>3/8</b> —
+    same objections - only the standing default changes between runs. The
+    evidence-driven judge flips <b>0/8</b>. The deferential judge flips <b>3/8</b> -
     exactly the ambiguous items, and its written reason admits the deference. If a
     judge defers to its instructions, the flip test lights up; if it weighs evidence,
     it stays dark. What a <i>live</i> judge scores is the question this repo hands
@@ -177,14 +177,14 @@ python -m chambers demo</pre>
   <div class="wrap">
     <h2>The case study that started this</h2>
     <div class="case">
-      <div class="label">NARRATIVE, NOT A BENCHMARK — NOT REGENERABLE FROM THIS REPOSITORY</div>
+      <div class="label">NARRATIVE, NOT A BENCHMARK - NOT REGENERABLE FROM THIS REPOSITORY</div>
       <p style="margin-top:10px">In the author's private multi-agent review program, two
-      review panels had rejected twelve of twelve proposals — a record that looked like
+      review panels had rejected twelve of twelve proposals - a record that looked like
       rigor. Re-judging a sample of those rejections on <b>byte-identical text</b>,
       changing only the judge's standing default from "presume this dies" to "presume
       this survives", reversed <b>3 of 4 verdicts</b>. What that established: the judges
-      were <i>instruction-sensitive</i> — a reliability failure upstream of any question
-      about the ideas. What it did <b>not</b> establish: the <i>direction</i> of bias —
+      were <i>instruction-sensitive</i> - a reliability failure upstream of any question
+      about the ideas. What it did <b>not</b> establish: the <i>direction</i> of bias -
       the follow-up design was ruled unidentifiable by its own review. The
       twelve-of-twelve record was stripped of evidentiary weight: not refuted, demoted.
       The flip-test harness on this page is how you would measure the same thing on
@@ -197,13 +197,13 @@ python -m chambers demo</pre>
   <div class="wrap">
     <h2>What this does NOT show</h2>
     <div class="honest">
-      <h3>A judge built to defer, deferring, proves the instrument — nothing else</h3>
+      <h3>A judge built to defer, deferring, proves the instrument - nothing else</h3>
       <p>The bundled agents are deterministic scripts. The flip-test contrast proves
       the harness detects instruction sensitivity; it says nothing about any AI model,
       cannot identify the <i>direction</i> of a real judge's bias (that needs a design
       where blinding and evidence access do not covary with the instruction), and
       cannot tell you whether adversarial review improves decisions. Live results
-      belong to whoever runs them — with their own variance, versions, and error bars —
+      belong to whoever runs them - with their own variance, versions, and error bars -
       and will never appear in this repository's README.</p>
     </div>
   </div>
@@ -212,7 +212,7 @@ python -m chambers demo</pre>
 <footer>
   <div class="wrap">
     MIT licensed · <a href="https://github.com/LZBiala/adversarial-chambers">source &amp; README</a> ·
-    this page is a static file in <code>docs/</code> — no build system, no external requests.
+    this page is a static file in <code>docs/</code> - no build system, no external requests.
   </div>
 </footer>
 
@@ -221,12 +221,12 @@ python -m chambers demo</pre>
 /* ---------- pattern stages ---------- */
 const STAGES = [
   { k: "SEPARATE", t: "One object, one seat", d: "Generator, refuter, and judge are distinct interfaces, and the orchestrator refuses one object in two seats.",
-    n: "An agent that judges its own proposal is a rubber stamp with extra steps. This is enforced by a raised exception, not etiquette — etiquette gets refactored away." },
+    n: "An agent that judges its own proposal is a rubber stamp with extra steps. This is enforced by a raised exception, not etiquette - etiquette gets refactored away." },
   { k: "REFUTE", t: "Dedicated opposition", d: "Every proposal gets its own refutation before any judgment; the judge sees the proposal AND the objection.",
     n: "A judge that only ever hears the pitch is a fan. The dedicated refuter guarantees every idea faces its strongest available attack." },
   { k: "JUDGE", t: "Verdict with a reason", d: "KILL or SURVIVE, plus a mandatory written cause. The ledger refuses an empty reason.",
     n: "A verdict you cannot audit later is a coin flip with paperwork. The reason field is the product, not a nicety." },
-  { k: "LEDGER", t: "The kill ledger", d: "One JSON line per verdict, append-only within a run — outcome, reason, judge, and the standing instruction it ran under.",
+  { k: "LEDGER", t: "The kill ledger", d: "One JSON line per verdict, append-only within a run - outcome, reason, judge, and the standing instruction it ran under.",
     n: "A clean kill is knowledge; an unrecorded one gets re-proposed a month later by someone who never saw it die. The instruction is recorded because of what the flip test proves: it can BE the verdict." },
 ];
 const loopRow = document.getElementById("loopRow");
@@ -247,20 +247,20 @@ selectStage(0);
 
 /* ---------- trial replay (verbatim from runs/chamber.md) ---------- */
 const BEATS = [
-  { c: "survive", line: "- footbridge-repair: SURVIVE — case outweighs the objection (5 vs 1)", name: "CLEAR SURVIVE",
-    h: "Strong case, weak objection", e: "The refuter took its shot — thin contractor pool — and the evidence balance still carried it. The reason cites the numbers it weighed." },
-  { c: "kill", line: "- glass-gazebo: KILL — objection outweighs the case (5 vs 1): Glazing costs dwarf the bandstand's entire budget and the square floods in spring.", name: "CLEAR KILL",
+  { c: "survive", line: "- footbridge-repair: SURVIVE - case outweighs the objection (5 vs 1)", name: "CLEAR SURVIVE",
+    h: "Strong case, weak objection", e: "The refuter took its shot - thin contractor pool - and the evidence balance still carried it. The reason cites the numbers it weighed." },
+  { c: "kill", line: "- glass-gazebo: KILL - objection outweighs the case (5 vs 1): Glazing costs dwarf the bandstand's entire budget and the square floods in spring.", name: "CLEAR KILL",
     h: "A kill with its cause of death attached", e: "This is the ledger's whole point: in a month, when someone proposes the gazebo again, the record says exactly why it died." },
-  { c: "survive", line: "- pond-dredging: SURVIVE — evidence tied — fixed tie-break: a tie survives, regardless of the standing instruction", name: "THE TIE",
-    h: "Ambiguity, handled by rule", e: "Evidence 3 vs 3. The evidence judge resolves ties by FIXED rule — which is exactly why it cannot flip. Remember this item; it stars in the next act." },
-  { c: "kill", line: "- bell-restoration: KILL — objection outweighs the case (3 vs 2): The bell tower masonry needs its own survey before any weight swings up there.", name: "NARROW KILL",
-    h: "A one-point margin", e: "Also ambiguous territory — margin of one. Evidence still decides here. But a judge that DEFERS would rule on the instruction instead…" },
+  { c: "survive", line: "- pond-dredging: SURVIVE - evidence tied - fixed tie-break: a tie survives, regardless of the standing instruction", name: "THE TIE",
+    h: "Ambiguity, handled by rule", e: "Evidence 3 vs 3. The evidence judge resolves ties by FIXED rule - which is exactly why it cannot flip. Remember this item; it stars in the next act." },
+  { c: "kill", line: "- bell-restoration: KILL - objection outweighs the case (3 vs 2): The bell tower masonry needs its own survey before any weight swings up there.", name: "NARROW KILL",
+    h: "A one-point margin", e: "Also ambiguous territory - margin of one. Evidence still decides here. But a judge that DEFERS would rule on the instruction instead…" },
   { c: "dim", line: "## flip test", name: "ACT TWO",
     h: "Cross-examine the judge", e: "Same eight proposals, same objections. Only the standing default changes: presume-dies, then presume-survives." },
   { c: "survive", line: "- EvidenceJudge: 0/8 verdicts flipped", name: "DARK",
-    h: "Evidence-driven: the test stays dark", e: "Every verdict identical under both instructions — instruction-insensitive by construction, and now demonstrated." },
+    h: "Evidence-driven: the test stays dark", e: "Every verdict identical under both instructions - instruction-insensitive by construction, and now demonstrated." },
   { c: "flip", line: "- DeferentialJudge: 3/8 verdicts flipped (flipped: pond-dredging, bell-restoration, orchard-lane-paving)", name: "★ LIT",
-    h: "Deferential: the test lights up", e: "Exactly the three ambiguous items flipped — the judge followed the instruction wherever evidence didn't force its hand. A verdict that flips with the phrasing was never a verdict about the evidence." },
+    h: "Deferential: the test lights up", e: "Exactly the three ambiguous items flipped - the judge followed the instruction wherever evidence didn't force its hand. A verdict that flips with the phrasing was never a verdict about the evidence." },
 ];
 const termOut = document.getElementById("termOut");
 const explainBox = document.getElementById("explainBox");
@@ -270,14 +270,14 @@ const btnNext = document.getElementById("btnNext");
 const btnReset = document.getElementById("btnReset");
 let pos = 0;
 function render() {
-  let html = '<span class="dim">CHAMBER: scripted generator/refuter/judges — deterministic, zero API keys; results are harness conformance, not any model\'s behavior</span>\n';
+  let html = '<span class="dim">CHAMBER: scripted generator/refuter/judges - deterministic, zero API keys; results are harness conformance, not any model\'s behavior</span>\n';
   for (let i = 0; i < pos; i++) {
     const b = BEATS[i];
     html += (b.c ? `<span class="${b.c}">` : "") + escapeHtml(b.line) + (b.c ? "</span>" : "") + "\n";
   }
   termOut.innerHTML = html;
   if (pos === 0) {
-    explainBox.innerHTML = `<div class="step-name">READY</div><h3>Press Next to replay the trial</h3><p>Seven beats: two clear rulings, the tie, a narrow kill — then the judge itself takes the stand.</p>`;
+    explainBox.innerHTML = `<div class="step-name">READY</div><h3>Press Next to replay the trial</h3><p>Seven beats: two clear rulings, the tie, a narrow kill - then the judge itself takes the stand.</p>`;
   } else {
     const b = BEATS[pos - 1];
     explainBox.innerHTML = `<div class="step-name">${b.name}</div><h3>${b.h}</h3><p>${b.e}</p>`;

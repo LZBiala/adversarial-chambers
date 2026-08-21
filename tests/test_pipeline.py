@@ -23,7 +23,7 @@ def run_demo(workdir: Path) -> None:
     shutil.copytree(REPO / "src", workdir / "src")
     shutil.copytree(REPO / "fixtures", workdir / "fixtures")
     shutil.copy(REPO / "README.md", workdir / "README.md")
-    result = subprocess.run(  # noqa: S603 — running our own module under test
+    result = subprocess.run(  # noqa: S603 - running our own module under test
         [sys.executable, "-m", "chambers", "demo", "--quiet"],
         cwd=workdir,
         env={**os.environ, "PYTHONPATH": str(workdir / "src")},
@@ -174,7 +174,7 @@ class TestInProcessCoverage:
 
 class TestHygieneGate:
     def test_repo_passes_its_own_gate(self) -> None:
-        result = subprocess.run(  # noqa: S603 — running our own tool under test
+        result = subprocess.run(  # noqa: S603 - running our own tool under test
             [sys.executable, str(REPO / "tools" / "blocklist_check.py")],
             capture_output=True,
             text=True,

@@ -7,7 +7,7 @@ Two judges ship, and their CONTRAST is the demonstration:
   rate under the instruction-flip test is 0 by construction.
 - DeferentialJudge decides from evidence only when the balance is CLEAR;
   on ambiguous items it follows whatever standing default instruction it was
-  given — and says so in its written reason. Its flip rate equals the number
+  given - and says so in its written reason. Its flip rate equals the number
   of ambiguous items, by construction.
 
 Neither says anything about any model. They prove the instrument: if a judge
@@ -94,7 +94,7 @@ class EvidenceJudge(Judge):
         self, proposal: Proposal, objection: Objection, default_instruction: str
     ) -> Verdict:
         # The objection is genuinely weighed: the against-side weight is the
-        # refuter's severity, not a fixture field — swap in a softer refuter
+        # refuter's severity, not a fixture field - swap in a softer refuter
         # and verdicts change. (With the shipped refuter the numbers coincide
         # with the fixture's evidence_against, by that refuter's design.)
         margin = proposal.evidence_for - objection.severity
@@ -110,7 +110,7 @@ class EvidenceJudge(Judge):
             )
         else:
             outcome, why = SURVIVE, (
-                "evidence tied — fixed tie-break: a tie survives, regardless "
+                "evidence tied - fixed tie-break: a tie survives, regardless "
                 "of the standing instruction"
             )
         return Verdict(
@@ -124,7 +124,7 @@ class EvidenceJudge(Judge):
 
 class DeferentialJudge(Judge):
     """Instruction-SENSITIVE by construction: on ambiguous evidence it follows
-    the standing default — and admits it in the written reason."""
+    the standing default - and admits it in the written reason."""
 
     name = "DeferentialJudge"
 
@@ -144,7 +144,7 @@ class DeferentialJudge(Judge):
             outcome = KILL if default_instruction == PRESUME_DIES else SURVIVE
             why = (
                 f"evidence ambiguous ({proposal.evidence_for} for, "
-                f"{proposal.evidence_against} against) — default presumption "
+                f"{proposal.evidence_against} against) - default presumption "
                 f"'{default_instruction}' applied"
             )
         return Verdict(

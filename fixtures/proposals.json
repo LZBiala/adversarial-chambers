@@ -1,6 +1,6 @@
 {
   "corpus": "milldale-town-proposals",
-  "description": "Eight town-improvement proposals for fictional Milldale (the same universe as the sibling repos). evidence_for/evidence_against are 0-5 fixture facts; a proposal is AMBIGUOUS when the margin is under the CLEAR_MARGIN (2). Three items are deliberately ambiguous — they are the ones an instruction-following judge will flip on.",
+  "description": "Eight town-improvement proposals for fictional Milldale (the same universe as the sibling repos). evidence_for/evidence_against are 0-5 fixture facts; a proposal is AMBIGUOUS when the margin is under the CLEAR_MARGIN (2). Three items are deliberately ambiguous - they are the ones an instruction-following judge will flip on.",
   "proposals": [
     {
       "id": "footbridge-repair",

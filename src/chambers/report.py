@@ -8,9 +8,9 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
-AUTOGEN_BEGIN = "<!-- AUTOGEN:BEGIN — rendered by report.py from metrics.jsonl; do not edit by hand -->"
+AUTOGEN_BEGIN = "<!-- AUTOGEN:BEGIN - rendered by report.py from metrics.jsonl; do not edit by hand -->"
 AUTOGEN_END = "<!-- AUTOGEN:END -->"
-DISCLAIMER = "scripted judges — the contrast proves the instrument, not any model's calibration"
+DISCLAIMER = "scripted judges - the contrast proves the instrument, not any model's calibration"
 
 _BLUE = "#2563eb"
 _RED = "#dc2626"
@@ -50,7 +50,7 @@ def render_flip_svg(metrics: Metrics) -> str:
         f'viewBox="0 0 {width} {height}" font-family="monospace" font-size="12">',
         f'<rect width="{width}" height="{height}" fill="#ffffff"/>',
         f'<text x="{left}" y="22" font-size="14" fill="#111111">'
-        "the flip test — verdicts changed by flipping ONLY the default instruction</text>",
+        "the flip test - verdicts changed by flipping ONLY the default instruction</text>",
         f'<text x="{left}" y="40" fill="#6b7280">'
         f"same {total} proposals, same objections; only the standing presumption differs</text>",
     ]
@@ -101,10 +101,10 @@ def render_claims(metrics: Metrics) -> str:
         (
             "| Every verdict carries its cause of death "
             f"| **{ch['verdicts']} verdicts ledgered: {ch['kills']} kills, "
-            f"{ch['survivals']} survivals — {ch['reasons_logged']} written reasons, "
+            f"{ch['survivals']} survivals - {ch['reasons_logged']} written reasons, "
             f"{int(ch['verdicts']) - int(ch['reasons_logged'])} empty** "  # type: ignore[call-overload]
             "| the chamber refuses a verdict without a written reason; "
-            "the ledger is one JSON line per verdict | conformance of the harness — "
+            "the ledger is one JSON line per verdict | conformance of the harness - "
             "the scripted judges' reasons are rule-generated, not model judgment |"
         ),
         (
@@ -113,7 +113,7 @@ def render_claims(metrics: Metrics) -> str:
             f"{deferential.get('total')} verdicts flipped when only the default "
             "instruction changed** | identical proposals and objections judged "
             "under presume-dies then presume-survives; within-item outcome "
-            "comparison | the judge is BUILT to defer on ambiguous items — this "
+            "comparison | the judge is BUILT to defer on ambiguous items - this "
             "proves the instrument lights up, not that any real judge behaves "
             "this way |"
         ),
@@ -130,7 +130,7 @@ def render_claims(metrics: Metrics) -> str:
             "are ambiguous, and they are exactly the flipped set** | ambiguity = "
             "evidence margin under the clear threshold; the flipped ids equal the "
             "ambiguous ids (asserted by test) | on clear evidence both judges "
-            "agree regardless of instruction — the danger zone is precisely the "
+            "agree regardless of instruction - the danger zone is precisely the "
             "cases that need judgment most |"
         ),
     ]

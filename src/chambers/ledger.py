@@ -2,13 +2,13 @@
 
 A clean kill is knowledge; an unrecorded one gets re-proposed a month later
 by someone who never saw it die. The ledger refuses a verdict without a
-written reason — an unexplained KILL is exactly as useless as an unexplained
-SURVIVE — and appends one JSON line per verdict so the record is grep-able
+written reason - an unexplained KILL is exactly as useless as an unexplained
+SURVIVE - and appends one JSON line per verdict so the record is grep-able
 and diff-able forever.
 
 Append semantics, stated: verdicts are recorded one at a time, as they
 happen. A chamber that fails mid-run therefore leaves a visible PARTIAL
-record — deliberately. An audit log that erased itself when something went
+record - deliberately. An audit log that erased itself when something went
 wrong would be the opposite of an audit log.
 """
 from __future__ import annotations
@@ -31,7 +31,7 @@ class KillLedger:
     def record(self, verdict: Verdict) -> None:
         if not verdict.reason.strip():
             raise LedgerError(
-                f"verdict on {verdict.proposal_id!r} has no written reason — "
+                f"verdict on {verdict.proposal_id!r} has no written reason - "
                 "an unexplained verdict is not a verdict"
             )
         if verdict.outcome not in (KILL, SURVIVE):

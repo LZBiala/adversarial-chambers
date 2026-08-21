@@ -1,4 +1,4 @@
-"""CLI: `python -m chambers demo` — the chamber and the flip test, no keys.
+"""CLI: `python -m chambers demo` - the chamber and the flip test, no keys.
 
 Regenerates runs/ (chamber transcript + kill ledger), metrics.jsonl,
 report/fliptest.svg, and the README AUTOGEN block. CI runs exactly this then
@@ -33,7 +33,7 @@ METRICS = REPO_ROOT / "metrics.jsonl"
 README = REPO_ROOT / "README.md"
 
 BANNER = (
-    "CHAMBER: scripted generator/refuter/judges — deterministic, zero API keys; "
+    "CHAMBER: scripted generator/refuter/judges - deterministic, zero API keys; "
     "results are harness conformance, not any model's behavior"
 )
 
@@ -60,7 +60,7 @@ def demo(quiet: bool) -> int:
     if not FIXTURE.exists():
         print(
             "chambers demo must run from a source checkout "
-            f"(pip install -e . or PYTHONPATH=src) — fixture not found at {FIXTURE}",
+            f"(pip install -e . or PYTHONPATH=src) - fixture not found at {FIXTURE}",
             file=sys.stderr,
         )
         return 1
@@ -91,7 +91,7 @@ def demo(quiet: bool) -> int:
         "",
     ]
     for verdict in verdicts:
-        line = f"- {verdict.proposal_id}: {verdict.outcome} — {verdict.reason}"
+        line = f"- {verdict.proposal_id}: {verdict.outcome} - {verdict.reason}"
         objection_line = (
             f"  objection raised: {objections[verdict.proposal_id].text}"
         )

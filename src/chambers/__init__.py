@@ -1,9 +1,9 @@
-"""chambers — adversarial orchestration patterns, with the judge on trial too.
+"""chambers - adversarial orchestration patterns, with the judge on trial too.
 
 The premise, stated so it can be attacked: one agent mostly agrees with how
-you phrased the question. A chamber separates the roles — one side generates
+you phrased the question. A chamber separates the roles - one side generates
 proposals, a dedicated refuter attacks each one, and a judge weighs the
-exchange — and writes every verdict to a ledger WITH its cause of death,
+exchange - and writes every verdict to a ledger WITH its cause of death,
 because an unrecorded kill gets re-proposed a month later. Then the part most
 pipelines skip: the judge itself is put on trial. The flip test re-runs the
 judge on IDENTICAL material changing only its standing default instruction;

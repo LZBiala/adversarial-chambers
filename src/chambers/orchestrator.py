@@ -1,7 +1,7 @@
 """The chamber loop: propose → dedicated refutation → judged verdict → ledger.
 
 Structural role separation is enforced here: the same object may not occupy
-two seats in one chamber. This is not etiquette — an agent that judges its
+two seats in one chamber. This is not etiquette - an agent that judges its
 own proposal collapses the whole design back into a single opinion wearing
 three hats.
 """
@@ -25,7 +25,7 @@ def run_chamber(
     # Seat separation is BEST-EFFORT, and says so: identity catches the same
     # object in two seats; the type check catches the cheapest collusion (a
     # dual-role class instantiated twice for generator and judge). Collusion
-    # via delegation or shared state is undetectable in Python — this is a
+    # via delegation or shared state is undetectable in Python - this is a
     # guardrail against accidents, not a provenance proof, and the README
     # design notes say the same.
     seats = [generator, refuter, judge]
@@ -33,7 +33,7 @@ def run_chamber(
         raise ChamberError("one object may not occupy two seats in a chamber")
     if type(generator) is type(judge):
         raise ChamberError(
-            "generator and judge share a class — a dual-role type judging its "
+            "generator and judge share a class - a dual-role type judging its "
             "own proposals is the cheapest collusion, refused"
         )
     if default_instruction not in DEFAULTS:
@@ -45,13 +45,13 @@ def run_chamber(
         if objection.proposal_id != proposal.proposal_id:
             raise ChamberError(
                 f"refuter answered {objection.proposal_id!r} for "
-                f"{proposal.proposal_id!r} — objections are per-proposal"
+                f"{proposal.proposal_id!r} - objections are per-proposal"
             )
         verdict = judge.judge(proposal, objection, default_instruction)
         if verdict.proposal_id != proposal.proposal_id:
             raise ChamberError(
                 f"judge ruled on {verdict.proposal_id!r} while trying "
-                f"{proposal.proposal_id!r} — verdicts are per-proposal"
+                f"{proposal.proposal_id!r} - verdicts are per-proposal"
             )
         if verdict.default_instruction != default_instruction:
             raise ChamberError(

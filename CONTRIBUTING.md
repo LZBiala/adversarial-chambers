@@ -28,15 +28,15 @@ ARE the claims, and the build fails if a fresh run disagrees with them.
 
 ## What PRs are welcome
 
-- **New fixture proposals** — especially ambiguous ones (evidence margin
+- **New fixture proposals** - especially ambiguous ones (evidence margin
   under the clear threshold); that zone is where the flip test earns its
   keep. Keep counts in sync with the README prose (tests pin them).
 - **New scripted judges or refuters** with a distinct, honestly stated
-  decision rule — each one is a probe of the instrument, not a benchmark
+  decision rule - each one is a probe of the instrument, not a benchmark
   entry.
 - **New structural contracts** in the orchestrator or ledger, with tests
   that show the raised exception, not just the happy path.
-- **Flip-test extensions** — e.g. multi-judge disagreement metrics — so long
+- **Flip-test extensions** - e.g. multi-judge disagreement metrics - so long
   as they stay deterministic and keyless.
 
 Doc fixes are welcome too; measured numbers are not hand-editable (see below).
@@ -49,5 +49,5 @@ Doc fixes are welcome too; measured numbers are not hand-editable (see below).
 
 Practically: never edit text between the `AUTOGEN` markers in README.md
 (report.py regenerates it), never type a measured number by hand, and never
-add live-model results to the README — the bring-your-own-judge seam exists
+add live-model results to the README - the bring-your-own-judge seam exists
 so you can run those yourself, elsewhere.

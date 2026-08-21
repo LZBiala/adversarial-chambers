@@ -37,7 +37,7 @@ class TestRoleSeparation:
     def test_dual_role_class_refused_even_as_two_instances(self, tmp_path: Path) -> None:
         # The cheapest collusion: one class holding both seats via two
         # instances. Deeper collusion (delegation, shared state) is
-        # undetectable — the docstring and README say so.
+        # undetectable - the docstring and README say so.
         class Impostor(ScriptedGenerator, EvidenceJudge):  # type: ignore[misc]
             pass
 
