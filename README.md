@@ -2,8 +2,8 @@
 
 ![flip test](report/fliptest.svg)
 
-**Multi-agent orchestration where ideas must survive cross-examination — and
-the judge is on trial too.** Generator, dedicated refuter, and judge are
+**A courtroom for AI ideas: one agent proposes, a second attacks, a judge
+rules — and the judge itself is cross-examined too.** Generator, dedicated refuter, and judge are
 structurally separated roles; every verdict lands in a kill ledger with its
 cause of death; and the flip test re-runs the judge on identical material
 changing only its standing instruction, because a verdict that flips with the
@@ -34,6 +34,16 @@ adversarial review improves outcomes, and not a debate framework. It is an
 **orchestration pattern library with the calibration harness built in**: role
 separation, an auditable ledger, and the instruction-flip test, all
 deterministic and replayable.
+
+## In plain English
+
+The courtroom above, scored. Show a doctor the same X-ray twice — one copy
+noted "probably fine," the other "probably not." If the diagnosis changes, you
+learned about the note, not the patient. That is the flip test. A practice
+judge built to follow hints flipped 3 of 8 rulings when only the hint changed;
+the judge built to weigh evidence flipped 0 of 8. And 3 of 4 is the failure
+that started this project: the author's own judges reversed three of four real
+rulings under the same test.
 
 ## Quickstart (no keys)
 
@@ -93,10 +103,9 @@ default from "presume this dies" to "presume this survives," reversed
 
 What that established: the judges were *instruction-sensitive* — a
 reliability failure upstream of any question about the ideas. What it did
-**not** establish: the *direction* of bias. The follow-up experiment was
-ruled unidentifiable by its own design review (blinding and evidence access
-covaried with the instruction), so no claim about over-killing versus
-under-killing survives. The twelve-of-twelve record was stripped of
+**not** establish: the *direction* of bias. The follow-up experiment failed its own design review — too many things
+changed at once to tell which direction the bias ran — so no claim about
+over-killing versus under-killing survives. The twelve-of-twelve record was stripped of
 evidentiary weight — not refuted, demoted.
 
 **These numbers are not regenerable from this repository** — they are a
@@ -104,10 +113,10 @@ documented case narrative from private work, told here with the same claim
 discipline the original record enforced. The flip-test harness above is how
 you would measure the same thing on your own judges.
 
-## Claims, treated like SLOs
+## Claims, retested on every change (SLO-style)
 
-Rendered from `metrics.jsonl` by `report.py` — no measured number below is
-typed by hand, and CI fails if regeneration disagrees.
+Every number below comes from `report.py`, never typed by hand — and the
+automated build fails if a fresh run disagrees.
 
 <!-- AUTOGEN:BEGIN — rendered by report.py from metrics.jsonl; do not edit by hand -->
 
